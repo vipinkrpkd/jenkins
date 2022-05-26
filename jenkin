@@ -1,26 +1,41 @@
-pipeline { 
-agent any 
-    stages {  
-        stage ('Build') { 
-		steps {
-			echo "Build done...!"
-		}
-        }
-        stage ('Test') { 
-		steps{ echo "Test done" }
-        
-        }
-       
-        stage ('Deploy') { 
-        	steps{ echo "Deploy done "}
+pipeline 
+{
+    agent any
+
+    stages 
+    {
+        stage('Build') 
+        {
+            steps 
+            {
+                echo 'Build App'
+            }
         }
 
-	stage ('Publish'){
-		steps{ sh 'mvnw package' }
-		post {
-			success { archiveArtifacts 'target/*.jar'}
-		}
-	}
-		
-    }           
- }
+        stage('Test') 
+        {
+            steps 
+            {
+                echo 'Test App'
+            }
+        }
+
+        stage('Deploy') 
+        {
+            steps 
+            {
+                echo 'Deploy App'
+            }
+        }
+    }
+
+    post
+    {
+
+    	always
+    	{
+    		emailext body: 'Summary', subject: 'Pipeline Status', to: 'selenium3bymukesh@gmail.com'
+    	}
+
+    }
+}

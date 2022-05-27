@@ -8,7 +8,7 @@ pipeline{
         }
         stage('Build'){
             steps {
-                sh 'mvn install'
+                sh 'M2_HOME install'
             }
         }
         stage('Test'){
